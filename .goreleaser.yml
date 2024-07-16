@@ -1,3 +1,5 @@
+version: 2
+
 builds:
 - main: ./cmd/tmplr/main.go
   ldflags:
@@ -24,51 +26,22 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+
 # Release
+
 ## Github Releases
 release:
   github:
     owner: atomicptr
     name: tmplr
   draft: false
-## Homebrew
-brews:
-  - name: tmplr
-    repository:
-      owner: atomicptr
-      name: homebrew-tools
-    directory: Formula
-    homepage: "https://github.com/atomicptr/tmplr"
-    description: |
-      Quickly create new files from templates
-## Scoop
-scoops:
-  - name: tmplr
-    repository:
-      owner: atomicptr
-      name: scoop-bucket
-    homepage: "https://github.com/atomicptr/tmplr"
-    description: |
-      Quickly create new files from templates
-## NFPM (deb and rpm)
-nfpms:
-  - package_name: tmplr
-    vendor: atomicptr
-    maintainer: "Christopher Kaster <me@atomicptr.de>"
-    homepage: "https://github.com/atomicptr/tmplr"
-    description: |
-      Quickly create new files from templates
-    formats:
-      - deb
-      - rpm
+
 ## AUR
 aurs:
   - name: tmplr-bin
-    homepage: "https://github.com/atomicptr/tmplr"
-    description: |
+    homepage: &homepage "https://github.com/atomicptr/tmplr"
+    description: &description |
       Quickly create new files from templates
-    maintainers:
-      - "Christopher Kaster <me@atomicptr.de>"
     private_key: "{{ .Env.AUR_KEY }}"
     git_url: "ssh://aur@aur.archlinux.org/tmplr-bin.git"
     provides:
@@ -76,3 +49,39 @@ aurs:
     commit_author:
       name: Christopher Kaster
       email: me@atomicptr.de
+    maintainers: &maintainers
+      - &maintainer "Christopher Kaster <me@atomicptr.de>"
+    license: &license GPL-3.0-later
+
+## Homebrew
+brews:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: homebrew-tools
+    directory: Formula
+    homepage: *homepage
+    description: *description
+    license: *license
+
+## Scoop
+scoops:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: scoop-bucket
+    homepage: *homepage
+    description: *description
+    license: *license
+
+## NFPM (deb and rpm)
+nfpms:
+  - package_name: tmplr
+    vendor: atomicptr
+    formats:
+      - deb
+      - rpm
+    homepage: *homepage
+    description: *description
+    license: *license
+    maintainer: *maintainer
