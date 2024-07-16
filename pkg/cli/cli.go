@@ -19,12 +19,6 @@ func Run() error {
 	flag.BoolVarP(&showVersion, "version", "", false, "Print tmplr version")
 	flag.Parse()
 
-	if flag.NArg() == 0 {
-		flag.Usage()
-		fmt.Println("\nPlease provide files to create.")
-		os.Exit(1)
-	}
-
 	if showVersion {
 		fmt.Println(meta.VersionString())
 		return nil
@@ -39,6 +33,12 @@ func Run() error {
 		fmt.Println(templateDir)
 
 		return nil
+	}
+
+	if flag.NArg() == 0 {
+		flag.Usage()
+		fmt.Println("\nPlease provide files to create.")
+		os.Exit(1)
 	}
 
 	templateFiles, err := fs.ListTemplateFiles()
