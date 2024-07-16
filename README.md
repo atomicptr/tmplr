@@ -1,6 +1,6 @@
 # tmplr
 
-tmplr is a cli tool to quickly create files from templates.
+Quickly create new files from templates.
 
 ## Usage
 

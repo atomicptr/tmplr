@@ -1,0 +1,78 @@
+builds:
+- main: ./cmd/tmplr/main.go
+  ldflags:
+    - -w -extldflags "-static"
+    - -X github.com/atomicptr/tmplr/pkg/meta.Version={{.Version}}
+    - -X github.com/atomicptr/tmplr/pkg/meta.GitCommit={{.FullCommit}}
+  env:
+    - CGO_ENABLED=0
+  goos:
+    - linux
+    - darwin
+    - windows
+  goarch:
+    - amd64
+archives:
+  - id: default
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+# Release
+## Github Releases
+release:
+  github:
+    owner: atomicptr
+    name: tmplr
+  draft: false
+## Homebrew
+brews:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: homebrew-tools
+    directory: Formula
+    homepage: "https://github.com/atomicptr/tmplr"
+    description: |
+      Quickly create new files from templates
+## Scoop
+scoops:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: scoop-bucket
+    homepage: "https://github.com/atomicptr/tmplr"
+    description: |
+      Quickly create new files from templates
+## NFPM (deb and rpm)
+nfpms:
+  - package_name: tmplr
+    vendor: atomicptr
+    maintainer: "Christopher Kaster <me@atomicptr.de>"
+    homepage: "https://github.com/atomicptr/tmplr"
+    description: |
+      Quickly create new files from templates
+    formats:
+      - deb
+      - rpm
+## AUR
+aurs:
+  - name: tmplr-bin
+    homepage: "https://github.com/atomicptr/tmplr"
+    description: |
+      Quickly create new files from templates
+    maintainers:
+      - "Christopher Kaster <me@atomicptr.de>"
+    private_key: "{{ .Env.AUR_KEY }}"
+    git_url: "ssh://aur@aur.archlinux.org/tmplr-bin.git"
+    provides:
+      - tmplr
+    commit_author:
+      name: Christopher Kaster
+      email: me@atomicptr.de
