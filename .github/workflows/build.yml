@@ -31,10 +31,6 @@ jobs:
           make build
           go test -v -covermode=count -coverprofile=coverage.out ./...
           $(go env GOPATH)/bin/golangci-lint run ./...
-      - name: Goveralls
-        uses: shogo82148/actions-goveralls@v1
-        with:
-          path-to-profile: coverage.out
       - name: Release Prep
         run: |
           git checkout -- go.mod go.sum
