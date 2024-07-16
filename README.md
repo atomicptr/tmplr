@@ -35,9 +35,9 @@ vars:
 ---
 <?php
 
-namespace {{namespace}};
+namespace {{.namespace}};
 
-class {{class}} {
+class {{.class}} {
     public function __constructor() {
     }
 }
@@ -58,9 +58,9 @@ vars:
 ---
 <?php
 
-namespace {{namespace}};
+namespace {{.namespace}};
 
-enum {{enum}} {
+enum {{.enum}} {
 }
 ```
 
@@ -75,27 +75,14 @@ lets get back to the project dir and create a new file:
 ```bash
 $ cd ~/to/my/project-dir
 $ tmplr src/controller/IndexController.php
-
-This filename matches multiple templates, please select one:
-
-    - [x] PHP Class Template ([class].php)
-    - [ ] PHP Enum Template  ( [enum].php)
-
-Namespace for this class:
-> App\Controller
-
-Template "src/controller/IndexController.php" created.
-
-$ cat src/controller/IndexController.php
-<?php
-
-namespace App\Controller;
-
-class IndexController {
-    public function __constructor() {
-    }
-}
 ```
+
+![Select Template](./.github/01-select-template.png)
+
+![Set User Vars](./.github/02-set-var.png)
+
+![See result](./.github/03-result.png)
+
 
 tmplr matches the filename against all files in its template directory in this case "IndexController.php" matches "\[class\].php" and "\[enum\].php"
 
