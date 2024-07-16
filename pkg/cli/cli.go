@@ -54,7 +54,10 @@ func Run() error {
 		matchingTemplates := tmpl.FindMatchingTemplates(arg, templateFiles)
 
 		if len(matchingTemplates) == 0 {
-			f.WriteString("")
+			_, err = f.WriteString("")
+			if err != nil {
+				return err
+			}
 			continue
 		}
 

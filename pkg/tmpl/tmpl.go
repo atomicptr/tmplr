@@ -72,10 +72,8 @@ func ParseTemplate(fileName, templateName string, r io.Reader) (*Template, error
 
 	nameVars := ParseFilename(fileName, templateName)
 
-	if nameVars != nil {
-		for key, value := range nameVars {
-			template.Data[key] = value
-		}
+	for key, value := range nameVars {
+		template.Data[key] = value
 	}
 
 	template.Content = string(content)
