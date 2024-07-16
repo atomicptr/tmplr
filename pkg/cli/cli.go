@@ -2,6 +2,7 @@ package cli
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/atomicptr/tplr/pkg/fs"
 	"github.com/atomicptr/tplr/pkg/meta"
@@ -17,6 +18,12 @@ func Run() error {
 	flag.BoolVarP(&showTemplateDir, "template-dir", "", false, "Print template directory location")
 	flag.BoolVarP(&showVersion, "version", "", false, "Print tmplr version")
 	flag.Parse()
+
+	if flag.NArg() == 0 {
+		flag.Usage()
+		fmt.Println("\nPlease provide files to create.")
+		os.Exit(1)
+	}
 
 	if showVersion {
 		fmt.Println(meta.VersionString())
