@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/atomicptr/tplr/pkg/tmpl"
+	"github.com/atomicptr/tmplr/pkg/tmpl"
 	"github.com/charmbracelet/huh"
 )
 

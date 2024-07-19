@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/atomicptr/tplr/pkg/fs"
-	"github.com/atomicptr/tplr/pkg/meta"
-	"github.com/atomicptr/tplr/pkg/tmpl"
+	"github.com/atomicptr/tmplr/pkg/fs"
+	"github.com/atomicptr/tmplr/pkg/meta"
+	"github.com/atomicptr/tmplr/pkg/tmpl"
 	flag "github.com/spf13/pflag"
 )
 

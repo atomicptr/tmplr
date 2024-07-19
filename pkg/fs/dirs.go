@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/atomicptr/tplr/pkg/meta"
+	"github.com/atomicptr/tmplr/pkg/meta"
 )
 
 func TemplateDir() (string, error) {

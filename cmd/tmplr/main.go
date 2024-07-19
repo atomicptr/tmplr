@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/atomicptr/tplr/pkg/cli"
+	"github.com/atomicptr/tmplr/pkg/cli"
 )
 
 func main() {

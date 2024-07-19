@@ -1,4 +1,4 @@
-module github.com/atomicptr/tplr
+module github.com/atomicptr/tmplr
 
 go 1.22.5
 
