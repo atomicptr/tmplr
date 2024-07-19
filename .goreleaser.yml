@@ -36,6 +36,14 @@ release:
     name: tmplr
   draft: false
 
+## Nix:
+nix:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: nix
+      branch: master
+
 ## AUR
 aurs:
   - name: tmplr-bin
