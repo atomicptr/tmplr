@@ -36,14 +36,6 @@ release:
     name: tmplr
   draft: false
 
-## Nix:
-nix:
-  - name: tmplr
-    repository:
-      owner: atomicptr
-      name: nix
-      branch: master
-
 ## AUR
 aurs:
   - name: tmplr-bin
@@ -59,7 +51,18 @@ aurs:
       email: me@atomicptr.de
     maintainers: &maintainers
       - &maintainer "Christopher Kaster <me@atomicptr.de>"
-    license: &license GPL-3.0-later
+    license: &license GPL-3.0-or-later
+
+## Nix:
+nix:
+  - name: tmplr
+    repository:
+      owner: atomicptr
+      name: nix
+      branch: master
+    homepage: *homepage
+    description: *description
+    license: gpl3
 
 ## Homebrew
 brews:
