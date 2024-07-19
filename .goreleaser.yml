@@ -60,6 +60,7 @@ nix:
       owner: atomicptr
       name: nix
       branch: master
+      token: "{{ .Env.GITHUB_TOKEN }}"
     homepage: *homepage
     description: *description
     license: gpl3
