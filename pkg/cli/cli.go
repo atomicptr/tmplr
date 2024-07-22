@@ -47,21 +47,10 @@ func Run() error {
 	}
 
 	for _, arg := range flag.Args() {
-		f, err := fs.OpenFile(arg)
-		if err != nil {
-			return fmt.Errorf("could not create file %s: %w", arg, err)
-		}
-		defer (func() {
-			err := f.Close()
-			if err != nil {
-				panic(err)
-			}
-		})()
-
 		matchingTemplates := tmpl.FindMatchingTemplates(arg, templateFiles)
 
 		if len(matchingTemplates) == 0 {
-			_, err = f.WriteString("")
+			err = os.WriteFile(arg, []byte(""), os.ModePerm)
 			if err != nil {
 				return err
 			}
@@ -112,6 +101,17 @@ func Run() error {
 		if err != nil {
 			return err
 		}
+
+		f, err := fs.OpenFile(arg)
+		if err != nil {
+			return fmt.Errorf("could not create file %s: %w", arg, err)
+		}
+		defer (func() {
+			err := f.Close()
+			if err != nil {
+				panic(err)
+			}
+		})()
 
 		_, err = f.WriteString(data)
 		if err != nil {
