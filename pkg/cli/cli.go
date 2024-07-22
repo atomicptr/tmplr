@@ -7,6 +7,7 @@ import (
 	"github.com/atomicptr/tmplr/pkg/fs"
 	"github.com/atomicptr/tmplr/pkg/meta"
 	"github.com/atomicptr/tmplr/pkg/tmpl"
+	"github.com/charmbracelet/huh"
 	flag "github.com/spf13/pflag"
 )
 
@@ -76,6 +77,11 @@ func Run() error {
 
 		if selected == nil {
 			tpl, err := selectTemplate(templates)
+
+			if err == huh.ErrUserAborted {
+				return nil
+			}
+
 			if err != nil {
 				return err
 			}
