@@ -34,7 +34,7 @@ jobs:
         run: |
           git checkout -- go.mod go.sum
           sudo apt update -y
-          sudo apt install -y nix-prefetch-url
+          sudo apt install -y nix-bin
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
       - name: Release
         uses: goreleaser/goreleaser-action@v6
