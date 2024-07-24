@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/atomicptr/tmplr/pkg/fs"
 	"github.com/atomicptr/tmplr/pkg/meta"
@@ -47,11 +48,21 @@ func Run() error {
 		return err
 	}
 
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
 	for _, arg := range flag.Args() {
-		matchingTemplates := tmpl.FindMatchingTemplates(arg, templateFiles)
+		p, err := filepath.Abs(arg)
+		if err != nil {
+			return err
+		}
+
+		matchingTemplates := tmpl.FindMatchingTemplates(p, templateFiles)
 
 		if len(matchingTemplates) == 0 {
-			f, err := fs.OpenFile(arg)
+			f, err := fs.OpenFile(p)
 			if err != nil {
 				return err
 			}
@@ -67,7 +78,7 @@ func Run() error {
 		var templates []*tmpl.Template
 
 		for _, templateFile := range matchingTemplates {
-			template, err := tmpl.LoadTemplate(arg, templateFile)
+			template, err := tmpl.LoadTemplate(p, templateFile)
 			if err != nil {
 				return err
 			}
@@ -109,14 +120,22 @@ func Run() error {
 			selected.Data[userVar.Name] = val
 		}
 
+		// add some vars that are always present
+		selected.Data["_cwd"] = cwd
+		selected.Data["_path"] = p
+		selected.Data["_dirname"] = filepath.Base(filepath.Dir(p))
+		selected.Data["_filename"] = filepath.Base(p)
+
+		fmt.Println(selected.Data)
+
 		data, err := selected.Render()
 		if err != nil {
 			return err
 		}
 
-		f, err := fs.OpenFile(arg)
+		f, err := fs.OpenFile(p)
 		if err != nil {
-			return fmt.Errorf("could not create file %s: %w", arg, err)
+			return fmt.Errorf("could not create file %s: %w", p, err)
 		}
 		defer (func() {
 			err := f.Close()

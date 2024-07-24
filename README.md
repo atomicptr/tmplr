@@ -90,6 +90,15 @@ The \[...\] part is variable and will as you can see above also be exported to t
 
 You could also create a template like this "\[controllerName\]Controller.php" which would also match for "IndexController" to make even more precise templates
 
+## Meta template variables
+
+tmplr also has some extra template variables that you don't have to specify like:
+
+- \_cwd - The current working directory
+- \_path - The absolute path of your new file, e.g. pkg/cli/test.go will use "/home/YOURNAME/dev/tmplr/pkg/cli/test.go" here
+- \_dirname - The name of the directory the new file is in, e.g. pkg/cli/test.go will use "cli" here
+- \_filename - The name of the file, e.g. pkg/cli/test.go will use "test.go" here
+
 ## Name
 
 tmplr comes from a mixture of template and Templar and is also supposed to be pronounced "Templar".
