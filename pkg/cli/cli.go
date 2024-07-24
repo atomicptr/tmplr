@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/atomicptr/tmplr/pkg/fs"
 	"github.com/atomicptr/tmplr/pkg/meta"
@@ -51,6 +52,12 @@ func Run() error {
 		matchingTemplates := tmpl.FindMatchingTemplates(arg, templateFiles)
 
 		if len(matchingTemplates) == 0 {
+			dir := filepath.Dir(arg)
+			err = os.MkdirAll(dir, os.ModePerm)
+			if err != nil {
+				return err
+			}
+
 			err = os.WriteFile(arg, []byte(""), os.ModePerm)
 			if err != nil {
 				return err
