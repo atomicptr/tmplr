@@ -55,7 +55,12 @@ func Run() error {
 			if err != nil {
 				return err
 			}
-			f.Close()
+			defer (func() {
+				err := f.Close()
+				if err != nil {
+					panic(err)
+				}
+			})()
 			continue
 		}
 
