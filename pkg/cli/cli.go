@@ -126,8 +126,6 @@ func Run() error {
 		selected.Data["_dirname"] = filepath.Base(filepath.Dir(p))
 		selected.Data["_filename"] = filepath.Base(p)
 
-		fmt.Println(selected.Data)
-
 		data, err := selected.Render()
 		if err != nil {
 			return err
