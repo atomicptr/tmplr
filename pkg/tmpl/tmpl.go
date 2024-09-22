@@ -110,6 +110,9 @@ func FindMatchingTemplates(filePath string, templateFiles []string) []string {
 }
 
 func MatchesFilename(fileName, templateName string) bool {
+	// escape "."
+	templateName = strings.ReplaceAll(templateName, ".", "\\.")
+
 	pattern := fmt.Sprintf("^%s$", regexp.MustCompile(`\[([^\]]+)\]`).ReplaceAllString(templateName, `([^/]+)`))
 
 	matched, err := regexp.MatchString(pattern, fileName)

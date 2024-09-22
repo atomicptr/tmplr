@@ -21,6 +21,7 @@ func TestMatchAndParseFilename(t *testing.T) {
 		{"fooBarbaz.ml", "[var1]Bar[var2].ml", true, map[string]string{"var1": "foo", "var2": "baz"}},
 		{"example.txt", "[name].txt", true, map[string]string{"name": "example"}},
 		{"example.txt", "[name].c", false, nil},
+		{"patch", "[name].h", false, nil},
 	}
 
 	for _, tc := range testCases {
